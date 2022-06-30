@@ -1,0 +1,20 @@
+Type: Package
+Package: xadmix
+Title: Subsetting and Plotting Optimized for Admixture Data
+Version: 0.0.1.0
+Authors@R: 
+    person("Lukas", "Schönmann", , "lukas.schoenmann@outlook.com", role = c("aut", "cre"))
+Description: A few functions which provide a quick way of subsetting
+    genomic admixture data and generating customizable stacked barplots.
+Imports: 
+    dplyr,
+    forcats,
+    ggplot2,
+    ggthemes,
+    gtools,
+    magrittr,
+    tidyr
+Suggests: 
+    viridis
+Encoding: UTF-8
+RoxygenNote: 7.2.0
