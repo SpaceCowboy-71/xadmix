@@ -12,6 +12,7 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
+<<<<<<< Updated upstream
         "cursorPosition": "20,0",
         "scrollLine": "0"
     },
@@ -21,6 +22,17 @@
     "collab_server": "",
     "source_window": "",
     "last_content_update": 1656619782,
+=======
+        "cursorPosition": "21,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1656619572,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1656619572,
+>>>>>>> Stashed changes
     "read_only": false,
     "read_only_alternatives": []
 }

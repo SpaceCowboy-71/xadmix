@@ -44,14 +44,14 @@
 #' # directly output grouped plot with clipping removed from elements
 #' # (useful if there are groups with a low number of observations)
 #' admix_barplot(data, 
-#'               grouping = "species"
+#'               grouping = "species",
 #'               noclip = TRUE)
 #' @import dplyr
+#' @import forcats
 #' @import ggplot2  
 #' @import viridis
 #' @importFrom tidyr pivot_longer
 #' @importFrom gtools mixedsort
-#' @importFrom forcats fct_inorder  
 #' @export
 admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NULL, grouping = NULL, palette = "default",
                           names = TRUE, xlab = "Individuals", ylab = "Ancestry", main = "Admixture Plot", noclip = FALSE) {

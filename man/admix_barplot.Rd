@@ -78,6 +78,6 @@ admix_barplot(data,
 # directly output grouped plot with clipping removed from elements
 # (useful if there are groups with a low number of observations)
 admix_barplot(data, 
-              grouping = "species"
+              grouping = "species",
               noclip = TRUE)
 }
