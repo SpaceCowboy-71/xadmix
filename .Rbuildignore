@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 dummy-data*
 README*
+^LICENSE\.md$

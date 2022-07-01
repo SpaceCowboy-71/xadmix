@@ -81,10 +81,10 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     # (solution from https://community.rstudio.com/t/r-ggplot2-reorder-stacked-plot/23912/8
     # TODO: sortkey also for other fields, like species country accession?
     if (hasArg(sortkey)) {
-        df3 <- data_tidy %>%
+        df_sortpos <- data_tidy %>%
             filter(ancestry == sortkey) %>%
             arrange(desc(percentage))
-        data_tidy$individual <- factor(data_tidy$individual, levels = df3$individual)
+        data_tidy$individual <- factor(data_tidy$individual, levels = df_sortpos$individual)
     }
     # fct_relevel is used to apply mixedsort on factors, then fct_rev to reverse the order
     plt <- ggplot(data_tidy, aes(individual, percentage, fill = fct_rev(fct_relevel(ancestry, mixedsort)))) +
