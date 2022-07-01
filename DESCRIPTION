@@ -7,16 +7,15 @@ Authors@R:
            comment = c(ORCID = "0000-0002-3161-4270"))
 Description: A few functions which provide a quick way of subsetting
     genomic admixture data and generating customizable stacked barplots.
+License: GPL (>= 3)
 Imports: 
     dplyr,
     forcats,
     ggplot2,
     ggthemes,
-    gtools,
     magrittr,
-    tidyr, 
+    stringr,
+    tidyr,
     viridis
-Suggests: 
 Encoding: UTF-8
 RoxygenNote: 7.2.0
-License: GPL (>= 3)

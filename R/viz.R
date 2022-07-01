@@ -51,7 +51,7 @@
 #' @import ggplot2  
 #' @import viridis
 #' @importFrom tidyr pivot_longer
-#' @importFrom gtools mixedsort
+#' @importFrom stringr str_sort
 #' @export
 admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NULL, grouping = NULL, palette = "default",
                           names = TRUE, xlab = "Individuals", ylab = "Ancestry", main = "Admixture Plot", noclip = FALSE) {
@@ -86,8 +86,8 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
             arrange(desc(percentage))
         data_tidy$individual <- factor(data_tidy$individual, levels = df_sortpos$individual)
     }
-    # fct_relevel is used to apply mixedsort on factors, then fct_rev to reverse the order
-    plt <- ggplot(data_tidy, aes(individual, percentage, fill = fct_rev(fct_relevel(ancestry, mixedsort)))) +
+    # fct_relevel is used to apply str_sort(numeric = TRUE) on factors, then fct_rev to reverse the order
+    plt <- ggplot(data_tidy, aes(individual, percentage, fill = fct_rev(fct_relevel(ancestry, str_sort(numeric = TRUE))))) +
         geom_col(width = 1) +
         theme_minimal() + # minimal theme to remove tick marks etc.
         labs(x = xlab, y = ylab, title = main) + # assign labels using arguments
