@@ -1,54 +1,59 @@
-#' Admixture Data Stacked Barplot 
+#' Admixture Data Stacked Barplot
 #'
 #' Stacked barplot optimized for admixture data.
-#' @param data Data frame containing the admixture data. 
-#' @param K Positions of the columns containing the ancestry percentages in the provided data frame; default is second to last column. 
-#' @param individuals Position of the column with the names for the x-axis; default ist the first column. 
-#' @param sortkey Name of the column containing ancestry percentages to sort the stacked barplot with. 
+#' @param data Data frame containing the admixture data.
+#' @param K Positions of the columns containing the ancestry percentages in the provided data frame; default is second to last column.
+#' @param individuals Position of the column with the names for the x-axis; default ist the first column.
+#' @param sortkey Name of the column containing ancestry percentages to sort the stacked barplot with.
 #' @param grouping Name of the column by which the stacked bars are to be grouped.
 #' @param palette Either a color palette object, or a string to use one of the predefined color palettes ("viridis", "turbo", "alternating"); default is a modified ggplot palette.
-#' @param names Whether to show the x-axis bar labels or not; default is "TRUE". 
-#' @param xlab A label for the x-axis. 
-#' @param ylab A label for the y-axis. 
+#' @param names Whether to show the x-axis bar labels or not; default is "TRUE".
+#' @param xlab A label for the x-axis.
+#' @param ylab A label for the y-axis.
 #' @param main A main title for the plot.
-#' @param noclip Directly draw the plot, with clipping removed from elements. Then function does not return an object; default is set to "FALSE". 
-#' @return A ggplot object of the stacked barplot. 
-#' @examples 
-#' admix_barplot(data) 
-#' 
-#' # for data frame with ancestries in third to last column, 
-#' # with x-axis names in second column
-#' admix_barplot(data, 
-#'               K = 3:ncol(data), 
-#'               individuals = 2)
+#' @param noclip Directly draw the plot, with clipping removed from elements. Then function does not return an object; default is set to "FALSE".
+#' @return A ggplot object of the stacked barplot.
+#' @examples
+#' admix_barplot(data)
 #'
-#' # grouping data by column "country", 
+#' # for data frame with ancestries in third to last column,
+#' # with x-axis names in second column
+#' admix_barplot(data,
+#'     K = 3:ncol(data),
+#'     individuals = 2
+#' )
+#'
+#' # grouping data by column "country",
 #' # and sorting each group by ancestry column "anc1"
-#' admix_barplot(data, 
-#'               K = 3:ncol(data), 
-#'               grouping = "country", 
-#'               sortkey = "anc1")
-#' 
-#' # changing color palette to "turbo" from package 'viridis', 
+#' admix_barplot(data,
+#'     K = 3:ncol(data),
+#'     grouping = "country",
+#'     sortkey = "anc1"
+#' )
+#'
+#' # changing color palette to "turbo" from package 'viridis',
 #' # and omitting bar labels
-#' admix_barplot(data, 
-#'               palette = "turbo", 
-#'               names = FALSE)
-#' 
+#' admix_barplot(data,
+#'     palette = "turbo",
+#'     names = FALSE
+#' )
+#'
 #' # removing title and changing axis labels text
-#' admix_barplot(data, 
-#'               title = "", 
-#'               xlab = "Accessions", 
-#'               ylab = "Ancestry [%]")
-#'               
+#' admix_barplot(data,
+#'     title = "",
+#'     xlab = "Accessions",
+#'     ylab = "Ancestry [%]"
+#' )
+#'
 #' # directly output grouped plot with clipping removed from elements
 #' # (useful if there are groups with a low number of observations)
-#' admix_barplot(data, 
-#'               grouping = "species",
-#'               noclip = TRUE)
+#' admix_barplot(data,
+#'     grouping = "species",
+#'     noclip = TRUE
+#' )
 #' @import dplyr
 #' @import forcats
-#' @import ggplot2  
+#' @import ggplot2
 #' @import viridis
 #' @importFrom tidyr pivot_longer
 #' @importFrom stringr str_sort
@@ -65,10 +70,10 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     if (nrow(data) == 0) {
         stop("No observations found!")
     }
-  
+
     # throw error if ancestry columns are not of class numeric
-    if (!is.numeric(as.matrix(data[,K]))) {
-      stop("Please select only numeric columns!")
+    if (!is.numeric(as.matrix(data[, K]))) {
+        stop("Please select only numeric columns!")
     }
 
     # rename a column to "individual"; default is first column
@@ -87,7 +92,10 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
         data_tidy$individual <- factor(data_tidy$individual, levels = df_sortpos$individual)
     }
     # fct_relevel is used to apply str_sort(numeric = TRUE) on factors, then fct_rev to reverse the order
-    plt <- ggplot(data_tidy, aes(individual, percentage, fill = fct_rev(fct_relevel(ancestry, str_sort(numeric = TRUE))))) +
+    str_sort_numeric <- function(x) {
+        return(str_sort(x, numeric = TRUE))
+    }
+    plt <- ggplot(data_tidy, aes(individual, percentage, fill = fct_rev(fct_relevel(ancestry, str_sort_numeric)))) +
         geom_col(width = 1) +
         theme_minimal() + # minimal theme to remove tick marks etc.
         labs(x = xlab, y = ylab, title = main) + # assign labels using arguments
@@ -138,13 +146,12 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
 
     # disable clipping for all elements if argument is set to TRUE
     if (noclip) {
-      pg <- ggplotGrob(plt)
-         for(i in which(grepl("*", pg$layout$name))){
-               pg$grobs[[i]]$layout$clip <- "off"
-           }
-         grid::grid.draw(pg)
+        pg <- ggplotGrob(plt)
+        for (i in which(grepl("*", pg$layout$name))) {
+            pg$grobs[[i]]$layout$clip <- "off"
+        }
+        grid::grid.draw(pg)
     } else {
-      return(plt)
+        return(plt)
     }
-    
 }
