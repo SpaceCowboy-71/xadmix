@@ -1,5 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-dummy-data*
+data-raw*
 README*
 ^LICENSE\.md$

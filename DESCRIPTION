@@ -8,6 +8,8 @@ Authors@R:
 Description: A few functions which provide a quick way of subsetting
     genomic admixture data and generating customizable stacked barplots.
 License: GPL (>= 3)
+Depends: 
+    R (>= 2.10)
 Imports: 
     dplyr,
     forcats,
@@ -18,4 +20,5 @@ Imports:
     tidyr,
     viridis
 Encoding: UTF-8
+LazyData: true
 RoxygenNote: 7.2.0
