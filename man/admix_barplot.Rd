@@ -48,36 +48,41 @@ A ggplot object of the stacked barplot.
 Stacked barplot optimized for admixture data.
 }
 \examples{
-admix_barplot(data) 
+admix_barplot(data)
 
-# for data frame with ancestries in third to last column, 
+# for data frame with ancestries in third to last column,
 # with x-axis names in second column
-admix_barplot(data, 
-              K = 3:ncol(data), 
-              individuals = 2)
+admix_barplot(data,
+    K = 3:ncol(data),
+    individuals = 2
+)
 
-# grouping data by column "country", 
+# grouping data by column "country",
 # and sorting each group by ancestry column "anc1"
-admix_barplot(data, 
-              K = 3:ncol(data), 
-              grouping = "country", 
-              sortkey = "anc1")
+admix_barplot(data,
+    K = 3:ncol(data),
+    grouping = "country",
+    sortkey = "anc1"
+)
 
-# changing color palette to "turbo" from package 'viridis', 
+# changing color palette to "turbo" from package 'viridis',
 # and omitting bar labels
-admix_barplot(data, 
-              palette = "turbo", 
-              names = FALSE)
+admix_barplot(data,
+    palette = "turbo",
+    names = FALSE
+)
 
 # removing title and changing axis labels text
-admix_barplot(data, 
-              title = "", 
-              xlab = "Accessions", 
-              ylab = "Ancestry [\%]")
-              
+admix_barplot(data,
+    title = "",
+    xlab = "Accessions",
+    ylab = "Ancestry [\%]"
+)
+
 # directly output grouped plot with clipping removed from elements
 # (useful if there are groups with a low number of observations)
-admix_barplot(data, 
-              grouping = "species",
-              noclip = TRUE)
+admix_barplot(data,
+    grouping = "species",
+    noclip = TRUE
+)
 }
