@@ -39,7 +39,7 @@ admix_barplot(
 
 \item{main}{A main title for the plot.}
 
-\item{noclip}{Directly draw the plot, with clipping removed from elements. Then function does not return an object; default is set to "FALSE".}
+\item{noclip}{Directly draw the plot, with clipping removed from elements. Then function does not return an object; default is set to "FALSE". Setting to "TRUE" may require launching a new R graphics device.}
 }
 \value{
 A ggplot object of the stacked barplot.
@@ -82,9 +82,16 @@ admix_barplot(xadmixture,
 
 # directly output grouped plot with clipping removed from elements
 # (useful if there are groups with a low number of observations)
-admix_barplot(xadmixture,
-    K = 4:ncol(xadmixture),
-    grouping = "species",
-    noclip = TRUE
-)
+# create a subset of the data
+xadmixture_sub <- admix_subset(xadmixture,
+                              anc = c("K3", "K4"), 
+                              pct = c(0.3, 0.2))
+# generate a grouped & sorted stacked barplot 
+admix_barplot(xadmixture_sub, 
+             K = 4:ncol(xadmixture),          
+             sortkey = "K5",
+             grouping = "country", 
+             palette = "viridis", 
+             names = FALSE, 
+             noclip = TRUE)
 }
