@@ -1,6 +1,6 @@
 #' Admixture Data Subsetting
 #'
-#' Subset function optimized for admixture data. 
+#' Subset function optimized for admixture data.
 #' Filters for the percentages of any number of ancestry (K) columns and prints progress. Also allows passing additional arguments to filter columns with.
 #' @param data Data frame containing the admixture data.
 #' @param anc Vector of ancestry column names to use for pairwise subsetting with percentage vector. Must be of same length as the supplied percentage vector.
@@ -14,20 +14,35 @@
 #' data("xadmixture")
 #' 
 #' # keep only observations with K1 > 0.1 and K2 > 0.01
-#' subset1 <- admix_subset(xadmixture, anc = c("K1", "K2"), pct = c(0.1, 0.01))
+#' subset1 <- admix_subset(xadmixture, 
+#'                         anc = c("K1", "K2"), 
+#'                         pct = c(0.1, 0.01))
 #'
 #' # keep only observations with K2 < 0.4 and K3 < 0.1
-#' subset2 <- admix_subset(xadmixture, anc = c("K2", "K3"), pct = c(0.4, 0.1), comparison = "less")
+#' subset2 <- admix_subset(xadmixture, 
+#'                         anc = c("K2", "K3"), 
+#'                         pct = c(0.4, 0.1), 
+#'                         comparison = "less")
 #' 
-#' # keep only observations with values "GBR" or "FRA" in column "country"
-#' # and values "lorem" or "dolor" in column "species"
-#' subset3 <- admix_subset(xadmixture, country = c("GBR", "FRA"), species = c("lorem", "dolor"))
+#' # keep only observations with values "GBR" or "FRA" in column 
+#' # "country" and values "lorem" or "dolor" in column "species"
+#' subset3 <- admix_subset(xadmixture, 
+#'                         country = c("GBR", "FRA"), 
+#'                         species = c("lorem", "dolor"))
 #' 
-#' # keep only observations with K1 > 0.1 and K4 < 0.3, without printing progress
-#' # subsets can be chained using the pipe operator from package `magrittr` 
-#' \dontrun{library(magrittr)
-#' subset4 <- admix_subset(xadmixture, anc = "K1", pct = 0.1, quiet = TRUE) %>% 
-#'  admix_subset(anc = "K4", pct = 0.3, comparison = "less", quiet = TRUE)}
+#' # keep only observations with K1 > 0.1 and K4 < 0.3, 
+#' # without printing progress; subsets can be chained 
+#' # using the pipe operator from package `magrittr` 
+#' \dontrun{
+#' library(magrittr)
+#' subset4 <- admix_subset(xadmixture, 
+#'                         anc = "K1", 
+#'                         pct = 0.1, 
+#'                         quiet = TRUE) %>% 
+#'  admix_subset(anc = "K4", 
+#'               pct = 0.3, 
+#'               comparison = "less", 
+#'               quiet = TRUE)}
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter
 #' @export
@@ -83,7 +98,3 @@ admix_subset <- function(data, anc = NULL, pct = NULL, comparison = "greater", q
     }
     return(asub)
 }
-
-
-subset4 <- admix_subset(xadmixture, anc = "K1", pct = 0.1) %>% 
-   admix_subset(anc = "K4", pct = 0.3, comparison = "less")

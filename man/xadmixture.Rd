@@ -22,4 +22,20 @@ xadmixture
 \description{
 A dataset containing simulated admixture data of 600 observations.
 }
+\examples{
+# load simulated admixture data
+data("xadmixture")
+
+# create a subset of the data
+xadmixture_sub <- admix_subset(xadmixture, 
+                       country = c("GBR", "FRA"),
+                       anc = c("K1", "K2"), 
+                       pct = c(0.02, 0.2))
+# generate a grouped & sorted stacked barplot
+admix_barplot(xadmixture_sub, 
+              K = 4:ncol(xadmixture),
+              sortkey = "K1",
+              grouping = "country", 
+              palette = "turbo")   
+}
 \keyword{datasets}

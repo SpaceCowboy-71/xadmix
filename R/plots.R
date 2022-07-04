@@ -3,7 +3,7 @@
 #' Stacked barplot optimized for admixture data.
 #' @param data Data frame containing the admixture data.
 #' @param K Positions of the columns containing the ancestry percentages in the provided data frame; default is second to last column.
-#' @param individuals Position of the column with the names for the x-axis; default ist the first column.
+#' @param individuals Position of the column with the names for the x-axis; default is the first column.
 #' @param sortkey Name of the column containing ancestry percentages to sort the stacked barplot with.
 #' @param grouping Name of the column by which the stacked bars are to be grouped.
 #' @param palette Either a color palette object, or a string to use one of the predefined color palettes ("viridis", "turbo", "alternating"); default is a modified ggplot palette.
@@ -14,32 +14,33 @@
 #' @param noclip Directly draw the plot, with clipping removed from elements. Then function does not return an object; default is set to "FALSE".
 #' @return A ggplot object of the stacked barplot.
 #' @examples
-#' admix_barplot(data)
-#'
-#' # for data frame with ancestries in third to last column,
-#' # with x-axis names in second column
-#' admix_barplot(data,
-#'     K = 3:ncol(data),
-#'     individuals = 2
-#' )
-#'
-#' # grouping data by column "country",
-#' # and sorting each group by ancestry column "anc1"
-#' admix_barplot(data,
-#'     K = 3:ncol(data),
-#'     grouping = "country",
-#'     sortkey = "anc1"
-#' )
-#'
-#' # changing color palette to "turbo" from package 'viridis',
-#' # and omitting bar labels
-#' admix_barplot(data,
-#'     palette = "turbo",
+#' # load simulated admixture data
+#' data("xadmixture")
+#' 
+#' # for data frame with ancestries (K) in fourth to last column,
+#' # without showing bar labels
+#' admix_barplot(xadmixture,
+#'     K = 4:ncol(xadmixture),
 #'     names = FALSE
 #' )
 #'
+#' # grouping data by column "country",
+#' # and sorting each group by ancestry column "K1"
+#' admix_barplot(xadmixture,
+#'     K = 4:ncol(xadmixture),
+#'     grouping = "country",
+#'     sortkey = "K1"
+#' )
+#'
+#' # changing color palette to "turbo" from package 'viridis',
+#' admix_barplot(xadmixture,
+#'     K = 4:ncol(xadmixture),
+#'     palette = "turbo",
+#' )
+#'
 #' # removing title and changing axis labels text
-#' admix_barplot(data,
+#' admix_barplot(xadmixture,
+#'     K = 4:ncol(xadmixture),
 #'     title = "",
 #'     xlab = "Accessions",
 #'     ylab = "Ancestry [%]"
@@ -47,7 +48,7 @@
 #'
 #' # directly output grouped plot with clipping removed from elements
 #' # (useful if there are groups with a low number of observations)
-#' admix_barplot(data,
+#' admix_barplot(xadmixture,
 #'     grouping = "species",
 #'     noclip = TRUE
 #' )

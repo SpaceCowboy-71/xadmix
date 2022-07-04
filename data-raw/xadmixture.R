@@ -53,30 +53,3 @@ write.csv(xadmixture, "data-raw/xadmixture.csv", row.names = FALSE)
 usethis::use_data(xadmixture, overwrite = TRUE)
 
 
-#-------------------------------------------------------------------------------
-
-# Test dummy dataset
-admix_barplot(xadmixture, 
-              K = 4:8, 
-              grouping = "country", 
-              names = FALSE, 
-              sortkey = "K1", 
-              palette = "turbo")
-
-admix_subset(xadmixture, 
-             country = c("GBR", "FRA"), 
-             anc = c("K1", "K5"), 
-             pct = c(0.1, 0.1)) %>%
-  admix_barplot(K = 4:8, 
-                sortkey = "K5", 
-                palette = "viridis", 
-                grouping = "country")
-
-admix_subset(xadmixture, 
-             species = c("lorem", "dolor"), 
-             anc = c("K2", "K4"), 
-             pct = c(0.1, 0.1)) %>%
-  admix_barplot(K = 4:8, 
-                sortkey = "K2", 
-                palette = "viridis", 
-                grouping = "species")
