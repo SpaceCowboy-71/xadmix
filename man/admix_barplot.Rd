@@ -83,6 +83,7 @@ admix_barplot(xadmixture,
 # directly output grouped plot with clipping removed from elements
 # (useful if there are groups with a low number of observations)
 admix_barplot(xadmixture,
+    K = 4:ncol(xadmixture),
     grouping = "species",
     noclip = TRUE
 )

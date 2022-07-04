@@ -99,7 +99,7 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     str_sort_numeric <- function(x) {
         return(str_sort(x, numeric = TRUE))
     }
-    plt <- ggplot(data_tidy, aes(.data$individual, percentage, fill = fct_rev(fct_relevel(ancestry, str_sort_numeric)))) +
+    plt <- ggplot(data_tidy, aes(.data$individual, .data$percentage, fill = fct_rev(fct_relevel(.data$ancestry, str_sort_numeric)))) +
         geom_col(width = 1) +
         theme_minimal() + # minimal theme to remove tick marks etc.
         labs(x = xlab, y = ylab, title = main) + # assign labels using arguments
