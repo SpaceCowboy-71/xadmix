@@ -4,16 +4,27 @@
 #' @param data Data frame containing the admixture data.
 #' @param anc Vector of ancestry column names to use for pairwise subsetting with percentage vector. Must be of same length as the supplied percentage vector.
 #' @param pct Vector of percentage values to use for pairwise subsetting with ancestry column name vector. Only ancestries with values above the percentage are kept.
-#' @param comparison What comparison operator to use for the subsetting. Can either be "greater" or "less"; default is ">". Also accepts "gt", "lt", ">" and "<".
+#' @param comparison What comparison operator to use for the subsetting. Can either be "greater" or "less"; default is "greater". Also accepts "gt", "lt", ">" and "<".
 #' @param quiet Whether to print progress or not; default is "FALSE".
 #' @param ... Variable number of additional vectors for subsetting. Looking at the column with argument name, keep only those observations with values which are elements of the argument vector.
 #' @return A subset of the provided data frame.
 #' @examples
-#' # keep only observations with anc1 > 10 and anc2 > 1
-#' subset1 <- admix_subset(data, anc = c("anc1", "anc2"), pct = c(10, 1))
+#' # load simulated admixture data
+#' data("xadmixture")
+#' 
+#' # keep only observations with K1 > 0.1 and K2 > 0.01
+#' subset1 <- admix_subset(xadmixture, anc = c("K1", "K2"), pct = c(0.1, 0.01))
 #'
+#' # keep only observations with K2 < 0.4 and K3 < 0.01
+#' subset2 <- admix_subset(xadmixture, anc = c("K2", "K3"), pct = c(0.4, 0.01), comparison = "less")
+#' 
 #' # keep only observations with values "GBR" or "FRA" in column "country"
-#' subset2 <- admix_subset(data, country = c("GBR", "FRA"))
+#' # and values "lorem" or "dolor" in column "species"
+#' subset3 <- admix_subset(xadmixture, country = c("GBR", "FRA"), species = c("lorem", "dolor"))
+#' 
+#' # keep only observations with K1 > 0.1 and K4 < 0.3, without printing progress
+#' subset4 <- admix_subset(admixture, anc = K1, pct = 0.1, quiet = TRUE) %>% 
+#'  admix_subset(anc = K4, pct = 0.3, comparison = "less", quiet = TRUE)
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter
 #' @export
