@@ -42,9 +42,9 @@ for (n in 1:n_anc) {
 # create a vector with the sum of all ancestry columns
 # excluding first column (which is the accession)
 # then normalize ancestry columns so they add up to 1
-d_sums <- rowSums(xadmixture[, -1])
+d_sums <- rowSums(xadmixture[, 4:8])
 for (n in 1:n_anc) {
-  anc <- paste0("anc", n)
+  anc <- paste0("K", n)
   xadmixture[anc] <- xadmixture[anc] / d_sums
 }
 
@@ -57,26 +57,26 @@ usethis::use_data(xadmixture, overwrite = TRUE)
 
 # Test dummy dataset
 admix_barplot(xadmixture, 
-              K = 2:6, 
+              K = 4:8, 
               grouping = "country", 
               names = FALSE, 
-              sortkey = "anc1", 
+              sortkey = "K1", 
               palette = "turbo")
 
 admix_subset(xadmixture, 
              country = c("GBR", "FRA"), 
-             anc = c("anc1", "anc5"), 
+             anc = c("K1", "K5"), 
              pct = c(0.1, 0.1)) %>%
-  admix_barplot(K = 2:6, 
-                sortkey = "anc5", 
+  admix_barplot(K = 4:8, 
+                sortkey = "K5", 
                 palette = "viridis", 
                 grouping = "country")
 
 admix_subset(xadmixture, 
              species = c("lorem", "dolor"), 
-             anc = c("anc2", "anc4"), 
+             anc = c("K2", "K4"), 
              pct = c(0.1, 0.1)) %>%
-  admix_barplot(K = 2:6, 
-                sortkey = "anc2", 
+  admix_barplot(K = 4:8, 
+                sortkey = "K2", 
                 palette = "viridis", 
                 grouping = "species")
