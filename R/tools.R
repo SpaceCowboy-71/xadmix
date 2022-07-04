@@ -45,6 +45,8 @@
 #'               quiet = TRUE)}
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter
+#' @importFrom stats na.omit
+#' @importFrom methods hasArg
 #' @export
 admix_subset <- function(data, anc = NULL, pct = NULL, comparison = "greater", quiet = FALSE, ...) {
     # ancestries <anc> and percentages <pct> can be vectors

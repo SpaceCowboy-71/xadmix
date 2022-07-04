@@ -75,7 +75,7 @@ admix_barplot(xadmixture,
 # removing title and changing axis labels text
 admix_barplot(xadmixture,
     K = 4:ncol(xadmixture),
-    title = "",
+    main = "",
     xlab = "Accessions",
     ylab = "Ancestry [\%]"
 )

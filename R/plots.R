@@ -41,7 +41,7 @@
 #' # removing title and changing axis labels text
 #' admix_barplot(xadmixture,
 #'     K = 4:ncol(xadmixture),
-#'     title = "",
+#'     main = "",
 #'     xlab = "Accessions",
 #'     ylab = "Ancestry [%]"
 #' )
@@ -49,6 +49,7 @@
 #' # directly output grouped plot with clipping removed from elements
 #' # (useful if there are groups with a low number of observations)
 #' admix_barplot(xadmixture,
+#'     K = 4:ncol(xadmixture),
 #'     grouping = "species",
 #'     noclip = TRUE
 #' )
@@ -58,6 +59,7 @@
 #' @import viridis
 #' @importFrom tidyr pivot_longer
 #' @importFrom stringr str_sort
+#' @importFrom methods hasArg
 #' @export
 admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NULL, grouping = NULL, palette = "default",
                           names = TRUE, xlab = "Individuals", ylab = "Ancestry", main = "Admixture Plot", noclip = FALSE) {
