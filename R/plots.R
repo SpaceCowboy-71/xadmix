@@ -60,6 +60,7 @@
 #' @importFrom tidyr pivot_longer
 #' @importFrom stringr str_sort
 #' @importFrom methods hasArg
+#' @importFrom rlang .data
 #' @export
 admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NULL, grouping = NULL, palette = "default",
                           names = TRUE, xlab = "Individuals", ylab = "Ancestry", main = "Admixture Plot", noclip = FALSE) {
@@ -90,15 +91,15 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     # TODO: sortkey also for other fields, like species country accession?
     if (hasArg(sortkey)) {
         df_sortpos <- data_tidy %>%
-            filter(ancestry == sortkey) %>%
-            arrange(desc(percentage))
+            filter(.data$ancestry == sortkey) %>%
+            arrange(desc(.data$percentage))
         data_tidy$individual <- factor(data_tidy$individual, levels = df_sortpos$individual)
     }
     # fct_relevel is used to apply str_sort(numeric = TRUE) on factors, then fct_rev to reverse the order
     str_sort_numeric <- function(x) {
         return(str_sort(x, numeric = TRUE))
     }
-    plt <- ggplot(data_tidy, aes(individual, percentage, fill = fct_rev(fct_relevel(ancestry, str_sort_numeric)))) +
+    plt <- ggplot(data_tidy, aes(.data$individual, percentage, fill = fct_rev(fct_relevel(ancestry, str_sort_numeric)))) +
         geom_col(width = 1) +
         theme_minimal() + # minimal theme to remove tick marks etc.
         labs(x = xlab, y = ylab, title = main) + # assign labels using arguments
