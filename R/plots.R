@@ -65,6 +65,7 @@
 #'              palette = "viridis", 
 #'              names = FALSE, 
 #'              noclip = TRUE)
+#' dev.off()
 #' @import dplyr
 #' @import forcats
 #' @import ggplot2

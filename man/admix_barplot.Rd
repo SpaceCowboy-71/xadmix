@@ -90,7 +90,8 @@ xadmixture_sub <- admix_subset(xadmixture,
                               anc = c("K3", "K4"), 
                               pct = c(0.3, 0.2))
 # generate a grouped & sorted stacked barplot 
-
+# setting "noclip" to "TRUE" may require opening a new graphics device
+dev.new()
 admix_barplot(xadmixture_sub, 
              K = 4:ncol(xadmixture),          
              sortkey = "K5",
@@ -98,4 +99,5 @@ admix_barplot(xadmixture_sub,
              palette = "viridis", 
              names = FALSE, 
              noclip = TRUE)
+dev.off()
 }
