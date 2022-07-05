@@ -1,6 +1,6 @@
 # *NEWS* 
 
-# xadmix 1.0.0.0 (2022-07-05)
+# xadmix 1.0.0 (2022-07-05)
 
 ## First Submission to CRAN
 
