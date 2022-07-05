@@ -7,9 +7,9 @@
 \format{
 A data frame with 600 rows and 8 variables: 
 \describe{
- \item{\code{acc}}{Accession name}
- \item{\code{country}}{Country of origin}
- \item{\code{species}}{Name of Species}
+ \item{\code{acc}}{Accession identifier}
+ \item{\code{country}}{Country where plant material was collected}
+ \item{\code{species}}{Name of species}
  \item{\code{K1},\code{K2},\code{K3},\code{K4},\code{K5}}{Admixture coefficients; expresses the proportions of the respective ancestries. Sum up to 1.}
 }
 }
