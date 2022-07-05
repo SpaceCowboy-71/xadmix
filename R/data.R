@@ -7,7 +7,7 @@
 #'  \item{\code{acc}}{Accession name}
 #'  \item{\code{country}}{Country of origin}
 #'  \item{\code{species}}{Name of Species}
-#'  \item{\code{K1} to \code{K5}}{Admixture coefficients; expresses the proportions of the respective ancestries. Sum up to 1.}
+#'  \item{\code{K1},\code{K2},\code{K3},\code{K4},\code{K5}}{Admixture coefficients; expresses the proportions of the respective ancestries. Sum up to 1.}
 #' }
 #' @source Data simulated for this package; for code see: \url{https://github.com/SpaceCowboy-71/xadmix/blob/main/data-raw/xadmixture.R}
 #' @examples 
