@@ -63,13 +63,15 @@ admix_barplot(xadmixture,
 admix_barplot(xadmixture,
     K = 4:ncol(xadmixture),
     grouping = "country",
-    sortkey = "K1"
+    sortkey = "K1",
+    names = FALSE
 )
 
 # changing color palette to "turbo" from package 'viridis',
 admix_barplot(xadmixture,
     K = 4:ncol(xadmixture),
     palette = "turbo",
+    names = FALSE
 )
 
 # removing title and changing axis labels text
@@ -77,7 +79,8 @@ admix_barplot(xadmixture,
     K = 4:ncol(xadmixture),
     main = "",
     xlab = "Accessions",
-    ylab = "Ancestry [\%]"
+    ylab = "Ancestry [\%]",
+    names = FALSE
 )
 
 # directly output grouped plot with clipping removed from elements
@@ -87,6 +90,7 @@ xadmixture_sub <- admix_subset(xadmixture,
                               anc = c("K3", "K4"), 
                               pct = c(0.3, 0.2))
 # generate a grouped & sorted stacked barplot 
+
 admix_barplot(xadmixture_sub, 
              K = 4:ncol(xadmixture),          
              sortkey = "K5",
