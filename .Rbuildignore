@@ -5,3 +5,4 @@ README*
 ^LICENSE\.md$
 readme*
 ^\.github$
+^cran-comments\.md$
