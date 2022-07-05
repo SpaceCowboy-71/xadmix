@@ -50,15 +50,16 @@
 #' @export
 admix_subset <- function(data, anc = NULL, pct = NULL, comparison = "greater", quiet = FALSE, ...) {
     # ancestries <anc> and percentages <pct> can be vectors
-    # they must be of the same length!
+    # however, they must be of the same length!
     # the first entries each form a pair, then the second ones...
-    # /!\ IMPORTANT: columns -must- be called "country" and "species" for respective
-    # subsetting to work!
 
     # Error handling - check for same length vectors
     if (length(anc) != length(pct)) stop("Ancestry and percentage vectors must be of same length!")
 
+    # reassign data arg for clarity
     asub <- data
+
+    # print total observations
     if (!quiet) {
         cat("observations:", nrow(asub), "\n")
     }
@@ -70,6 +71,7 @@ admix_subset <- function(data, anc = NULL, pct = NULL, comparison = "greater", q
     if (length(arg_names) > 0) {
         for (i in 1:length(arg_names)) {
             asub <- asub %>% filter(asub[[arg_names[i]]] %in% args[[i]])
+            # print progress
             if (!quiet) {
                 cat("keeping only specified values in col:", arg_names[i], "\n")
                 cat("\tobservations left after this step:", nrow(asub), "\n")
@@ -78,7 +80,7 @@ admix_subset <- function(data, anc = NULL, pct = NULL, comparison = "greater", q
     }
 
     # loop over all ancestry-percentage pairs,
-    # only selecting those with percentage higher than cutoff
+    # only selecting those with percentage higher or lower than cutoff
     # generating one subset
     if (hasArg(anc) && hasArg(pct)) {
         for (i in 1:length(anc)) {
@@ -92,6 +94,7 @@ admix_subset <- function(data, anc = NULL, pct = NULL, comparison = "greater", q
                 stop("comparison must be either 'gt' or 'lt'")
             }
             asub <- na.omit(asub)
+            # print progress
             if (!quiet) {
                 cat(i, ". subset, ", anc[i], " ", compc, " ", pct[i], "\n", sep = "")
                 cat("\tobservations:", nrow(asub), "\n")

@@ -71,12 +71,6 @@
 #' @export
 admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NULL, grouping = NULL, palette = "default",
                           names = TRUE, xlab = "Individuals", ylab = "Ancestry", main = "Admixture Plot", noclip = FALSE) {
-    # K being the selection of ancestry columns to use
-    # convert to tidy (long) format
-    # /!\ IMPORTANT - format of columns must be:
-    # <individual> - <country> - <species> - <ancestries> - <...>
-    # first three columns are reserved for additional info, order doesn't matter!
-
     # throw error if there are now observations
     if (nrow(data) == 0) {
         stop("No observations found!")
@@ -94,14 +88,13 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     data_tidy <- pivot_longer(data, K, names_to = "ancestry", values_to = "percentage")
 
     # sort the bars descending, using sortkey arg
-    # (solution from https://community.rstudio.com/t/r-ggplot2-reorder-stacked-plot/23912/8
-    # TODO: sortkey also for other fields, like species country accession?
     if (hasArg(sortkey)) {
         df_sortpos <- data_tidy %>%
             filter(.data$ancestry == sortkey) %>%
             arrange(desc(.data$percentage))
         data_tidy$individual <- factor(data_tidy$individual, levels = df_sortpos$individual)
     }
+
     # fct_relevel is used to apply str_sort(numeric = TRUE) on factors, then fct_rev to reverse the order
     str_sort_numeric <- function(x) {
         return(str_sort(x, numeric = TRUE))
@@ -129,23 +122,22 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     # check first whether "palette" arg is single string to use premade palette
     if (is.character(palette) & length(palette) == 1) {
         if (palette == "viridis") {
-            # switch to viridis color palette to make bars more discernible in some cases
+            # viridis for colorblind support
             plt <- plt + scale_fill_viridis(discrete = TRUE, name = "")
         } else if (palette == "turbo") {
-            # much improved rainbow color map; author's choice
+            # much improved rainbow color map
             plt <- plt + scale_fill_viridis(discrete = TRUE, name = "", option = "turbo")
         } else if (palette == "default") {
             # default with slightly increased chromaticity and reduced luminance
             plt <- plt + scale_fill_hue(c = 130, l = 55, name = "")
         } else if (palette == "alternating") {
-            # TODO: palette color count (n) must be dynamic!
             hexcols <- c(
                 "#821E00", "#C08D00", "#AAF300", "#00D647", "#007294", "#1F007B", "#600082", "#8A007E",
                 "#E35500", "#FFC115", "#C4FF3B", "#24FF6D", "#00BAF2", "#3800DF", "#A600E3", "#EA00D7"
             )
             plt <- plt + scale_fill_manual(values = hexcols, name = "")
         }
-        # if no single string was provided, use "palette" arg as palette
+        # if no single string was provided, use "palette" arg as palette object
     } else {
         plt <- plt + scale_fill_manual(values = palette, name = "")
     }
@@ -156,6 +148,7 @@ admix_barplot <- function(data, K = 2:ncol(data), individuals = 1, sortkey = NUL
     }
 
     # disable clipping for all elements if argument is set to TRUE
+    # might require to reload graphics device with dev.new()
     if (noclip) {
         pg <- ggplotGrob(plt)
         for (i in which(grepl("*", pg$layout$name))) {
