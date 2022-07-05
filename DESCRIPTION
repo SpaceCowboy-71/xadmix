@@ -1,7 +1,7 @@
 Type: Package
 Package: xadmix
 Title: Subsetting and Plotting Optimized for Admixture Data
-Version: 0.0.1.0
+Version: 1.0.0.0
 Authors@R: 
     person("Lukas", "Schönmann", , "lukas.schoenmann@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3161-4270"))
