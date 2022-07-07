@@ -1,3 +1,9 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Removed an unnecessary \dontrun{} from examples
+* Did not add a reference to DESCRIPTION, as there are no relevant articles about admixture plots in particular
+
 # First Submission
 
 ## Test environments

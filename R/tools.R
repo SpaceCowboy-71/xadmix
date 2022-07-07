@@ -33,7 +33,6 @@
 #' # keep only observations with K1 > 0.1 and K4 < 0.3, 
 #' # without printing progress; subsets can be chained 
 #' # using the pipe operator from package `magrittr` 
-#' \dontrun{
 #' library(magrittr)
 #' subset4 <- admix_subset(xadmixture, 
 #'                         anc = "K1", 
@@ -42,7 +41,7 @@
 #'  admix_subset(anc = "K4", 
 #'               pct = 0.3, 
 #'               comparison = "less", 
-#'               quiet = TRUE)}
+#'               quiet = TRUE)
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter
 #' @importFrom stats na.omit
