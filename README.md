@@ -1,6 +1,9 @@
 ﻿# xadmix - Subset and Visualize Genetic Admixture Data
-
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/xadmix)](https://CRAN.R-project.org/package=xadmix)
 [![R-CMD-check](https://github.com/SpaceCowboy-71/xadmix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SpaceCowboy-71/xadmix/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 
 `xadmix` is an R package providing functions to facilitate subsetting and plotting of genetic admixture data. 
 
